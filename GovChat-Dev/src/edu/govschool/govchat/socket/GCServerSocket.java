@@ -12,7 +12,22 @@ import javafx.application.Platform;
  * will instantiate an instance of this class for use.
  * @author Mr. Davis
  */
-public class GCServerSocket 
+public class GCServerSocket extends GCGenericSocket
+implements GCSocketListener
 {
-
+    @Override
+    public void onMessage(final String line)
+    {}
+    
+    @Override
+    public void onCloseUpdate(final Boolean isClosed)
+    {}
+    
+    @Override
+    public void initConnection() throws SocketException 
+    {}
+    
+    @Override
+    public void closeAdditionalSockets()
+    {}
 }
