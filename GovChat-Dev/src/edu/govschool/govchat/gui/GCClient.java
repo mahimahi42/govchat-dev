@@ -80,26 +80,47 @@ public class GCClient extends Application
     
     private void sendBtn_click()
     {
-        
+        // Create a temporary variable to store our message
+        final String msg = entryField.getText();
+        // Only send non-empty messages
+        if (!msg.equals("")) {
+            // Send the message over the connection
+            clientSocket.sendMessage(msg);
+            // Update our own message area
+            msgArea.appendText("CLIENT: " + msg + "\n");
+            // Set the entry field text to the empty string
+            entryField.setText("");
+        }
     }
     
     private void connectBtn_click()
     {
-    
+        // Only connect if we have no connection
+        if (socketClosed) {
+            clientSocket = new GCClientSocket(new ClientSocketListener(),
+                                              GCClientSocket.DEFAULT_HOST,
+                                              GCClientSocket.DEFAULT_PORT);
+            clientSocket.connect();
+        }
     }
     
+    // This private class will be our listener for our client socket. It will
+    // listen for messages sent from the server and for the connection status of
+    // the socket.
     private class ClientSocketListener implements GCSocketListener
     {
+        // If we've received a server message
         @Override
         public void onMessage(final String line)
         {
-            
+            msgArea.appendText("SERVER: " + line);
         }
         
+        // Update our connection status
         @Override
         public void onCloseUpdate(final Boolean isClosed)
         {
-            
+            socketClosed = isClosed;
         }
     }
 }
