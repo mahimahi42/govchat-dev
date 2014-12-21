@@ -1,7 +1,6 @@
 package edu.govschool.govchat.gui.modals;
 
 // For representing the connection
-import java.util.HashMap;
 import java.util.Map;
 // Our JavaFX imports
 import javafx.geometry.*;
