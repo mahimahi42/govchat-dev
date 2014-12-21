@@ -18,6 +18,8 @@ public class GCConnectionOptionsBox
     private static Stage stage;
     private static TextField portField;
     private static TextField hostField;
+    private static Label portLabel;
+    private static Label hostLabel;
     private static Button connectBtn;
     
     // The final representation of our desired connection
@@ -35,6 +37,8 @@ public class GCConnectionOptionsBox
         // Initialize the rest of our elements
         portField = new TextField();
         hostField = new TextField();
+        portLabel = new Label("Port:");
+        hostLabel = new Label("Host:");
         connectBtn = new Button("Connect");
         
         // Set some options for our elements
@@ -43,7 +47,10 @@ public class GCConnectionOptionsBox
         connectBtn.setOnAction(e -> connectBtn_click());
         
         // Organize our elements
-        HBox pane = new HBox(10, hostField, portField, connectBtn);
+        HBox pane = new HBox(10, hostLabel, hostField, portLabel, portField, 
+                                    connectBtn);
+        pane.setAlignment(Pos.CENTER);
+        pane.setPadding(new Insets(10));
         Scene scene = new Scene(pane);
         
         // Display our window
