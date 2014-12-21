@@ -35,8 +35,8 @@ public class GCConnectionOptionsBox
         stage.setTitle("Connect to GovChat");
         
         // Initialize the rest of our elements
-        portField = new TextField();
-        hostField = new TextField();
+        portField = new TextField("localhost");
+        hostField = new TextField("2000");
         portLabel = new Label("Port:");
         hostLabel = new Label("Host:");
         connectBtn = new Button("Connect");
