@@ -168,10 +168,27 @@ public abstract class GCGenericSocket implements GCSocketListener
      */
     private class SocketSetupThread extends Thread
     {
+        // run() is the method that does the work of the Thread, like main() for
+        // the entire application.
         @Override
         public void run()
         {
-            
+            try {
+                // Initialize our socket connections.
+                initConnection();
+                // If we're successful, setup our I/O streams.
+                if (socketConnection != null && !socketConnection.isClosed()) {
+                    input = new BufferedReader(new InputStreamReader(
+                            socketConnection.getInputStream()));
+                    output = new BufferedWriter(new OutputStreamWriter(
+                            socketConnection.getOutputStream()));
+                    output.flush();
+                }
+                notifyReady(); // We're done! Let the world know
+            } catch (Exception e) {
+                // We failed, but we still have to close this Thread.
+                notifyReady();
+            }
         }
     }
     
@@ -185,7 +202,34 @@ public abstract class GCGenericSocket implements GCSocketListener
         @Override
         public void run()
         {
+            // Wait for our setup to be finished
+            waitForReady();
             
+            // Let JavaFX know we have a working connection, if we do
+            if (socketConnection != null && socketConnection.isConnected()) {
+                Platform.runLater(() -> onCloseUpdate(false));
+            }
+            
+            // Read from our input stream
+            try {
+                if (input != null) {
+                    // This is a common convention for reading from an input
+                    // stream.
+                    String line;
+                    while ((line = input.readLine()) != null) {
+                        // We need to send our message to JavaFX, so we can
+                        // display it in our GUI. But, to pass our line variable
+                        // to a lambda, we have to make it final, or constant.
+                        final String tmp = line;
+                        Platform.runLater(() -> onMessage(tmp));
+                    }
+                }
+            } catch (IOException e) {}
+            // finally will run code regardless of whether or not we get an
+            // exception, a good place to clean up everything
+            finally {
+                close();
+            }
         }
     }
 }
