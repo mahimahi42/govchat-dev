@@ -43,7 +43,39 @@ public class GCClient extends Application
     @Override
     public void start(Stage primaryStage)
     {
+        // Initialize our GUI elements
+        msgArea = new TextArea();
+        entryField = new TextField();
+        sendBtn = new Button("Send");
+        connectBtn = new Button("Connect to localhost");
         
+        // Set some options on our elements
+        msgArea.setEditable(false); // Our messages should be read-only
+        msgArea.setPrefColumnCount(20);
+        msgArea.setPrefRowCount(20); // 20rows x 20characters big
+        msgArea.setWrapText(true); // Our text will wrap if it's too big
+        entryField.setPrefColumnCount(20); // Entry field is 20 characters wide
+        entryField.setPromptText("Enter a message");
+        
+        // Set our event handlers
+        sendBtn.setOnAction(e -> sendBtn_click());
+        connectBtn.setOnAction(e -> connectBtn_click());
+        
+        // Organize our GUI
+        HBox entryPane = new HBox(10, entryField, sendBtn);
+        VBox pane = new VBox(10, msgArea, entryPane, connectBtn);
+        pane.setAlignment(Pos.CENTER);
+        
+        // Display our GUI
+        Scene scene = new Scene(pane);
+        primaryStage.setScene(scene);
+        
+        // Set our window options
+        primaryStage.setTitle("GovChat Client");
+        primaryStage.setOnCloseRequest(e -> {
+            if (clientSocket != null) clientSocket.shutdown();
+        });
+        primaryStage.show();
     }
     
     private void sendBtn_click()
