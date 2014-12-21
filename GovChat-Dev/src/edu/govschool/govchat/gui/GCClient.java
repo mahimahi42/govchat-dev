@@ -113,7 +113,7 @@ public class GCClient extends Application
         @Override
         public void onMessage(final String line)
         {
-            msgArea.appendText("SERVER: " + line);
+            msgArea.appendText("SERVER: " + line + "\n");
         }
         
         // Update our connection status
