@@ -77,6 +77,37 @@ public abstract class GCGenericSocket implements GCSocketListener
         } catch (Exception e) {} // You dun goofed!
     }
     
+    public void shutdown()
+    {
+        
+    }
+    
+    private void close()
+    {
+        
+    }
+    
+    public abstract void initConnection() throws SocketException;
+    
+    public abstract void closeAdditionalSockets();
+    
+    private synchronized void waitForReady()
+    {
+        
+    }
+    
+    private synchronized void notifyReady()
+    {
+        
+    }
+    
+    public void sendMessage(String msg)
+    {
+        
+    }
+    
+    
+    
     /**
      * Setup our initial connection in the background.
      * Normally, our entire application would have to wait until the connection
