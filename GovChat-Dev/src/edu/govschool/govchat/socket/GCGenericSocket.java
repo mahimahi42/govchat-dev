@@ -28,7 +28,7 @@ public abstract class GCGenericSocket implements GCSocketListener
     // The Socket connection we'll be using
     // `protected` means that we and our subclasses can access this property, 
     // no classes outside us.
-    protected Socket socketConncetion = null;
+    protected Socket socketConnection = null;
     // Streams to perform I/O
     private BufferedWriter output = null;
     private BufferedReader input = null;
@@ -77,36 +77,88 @@ public abstract class GCGenericSocket implements GCSocketListener
         } catch (Exception e) {} // You dun goofed!
     }
     
+    /**
+     * Shut down the socket from further use.
+     * The socket can no longer accept connections after this method.
+     */
     public void shutdown()
     {
-        
+        close();
     }
     
+    /**
+     * Closes down the socket.
+     * <code>close()</code> is private so the implementation can be hidden and 
+     * updated without changing things for the user.
+     */
     private void close()
     {
-        
+        try {
+            if (socketConnection != null && !socketConnection.isClosed()) {
+                socketConnection.close();
+            }
+            
+            System.out.println("Connection closed");
+            
+            // We need to let the JavaFX application know we've closed the
+            // socket. Platform.runLater() will allow us to do that in a
+            // thread-safe manner.
+            Platform.runLater(() -> onCloseUpdate(true));
+        } catch (IOException e) {} // You dun goofed!
     }
     
+    /**
+     * Initialize the socket connection.
+     * The client and server sockets will initialize different, so this method 
+     * is left as abstract, to be implemented in the subclasses.
+     * @throws SocketException the connection could not be created
+     */
     public abstract void initConnection() throws SocketException;
     
+    /**
+     * Closes any outstanding connections.
+     * In case our subclasses create more than one socket, we'll close them
+     * here.
+     */
     public abstract void closeAdditionalSockets();
     
+    /**
+     * Wait until our setup is finished.
+     * Our <code>SocketSetupThread</code> will called <code>notifyReady()</code>
+     * to let us know it's done, successfully or otherwise. The
+     * <code>synchronized</code> keyword means this method is thread-safe.
+     */
     private synchronized void waitForReady()
     {
-        
+        while (!ready) {
+            try {
+                wait();
+            } catch (InterruptedException e) {} // Goofin occurred.
+        }
     }
     
+    /**
+     * Notify <code>waitForReady()</code> that we are, in fact, ready.
+     */
     private synchronized void notifyReady()
     {
-        
+        ready = true;
+        notifyAll(); // From java.lang.Object
     }
     
+    /**
+     * Send a <code>String</code> over the connection.
+     * A newline is appended to the message for clarity.
+     * @param msg the message to send
+     */
     public void sendMessage(String msg)
     {
-        
+        try {
+            output.write(msg, 0, msg.length());
+            output.newLine();
+            output.flush();
+        } catch (IOException e) {} // The message failed to send...
     }
-    
-    
     
     /**
      * Setup our initial connection in the background.
