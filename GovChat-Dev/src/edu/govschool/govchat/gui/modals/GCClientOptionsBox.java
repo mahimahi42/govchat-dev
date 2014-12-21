@@ -16,59 +16,52 @@ import javafx.stage.*;
  * wish to connect to.
  * @author Mr. Davis
  */
-public class GCConnectionOptionsBox 
+public class GCClientOptionsBox extends GCConnectionOptionsBox
 {
-    // Our GUI elements for our options box
-    private static Stage stage;
-    private static TextField portField;
+    // The unique GUI elements for our options box
     private static TextField hostField;
-    private static Label portLabel;
     private static Label hostLabel;
-    private static Button connectBtn;
-    
-    // The final representation of our desired connection
-    private static Map<String, String> connection = new HashMap<>();
-    
-    public static Map show()
-    {
+
+    @Override
+    public Map show() {
         // Create our Stage to display
         stage = new Stage();
-        
+
         // Set some options for our window
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Connect to GovChat");
-        
+
         // Initialize the rest of our elements
         hostField = new TextField("localhost");
         portField = new TextField("2000");
         portLabel = new Label("Port:");
         hostLabel = new Label("Host:");
         connectBtn = new Button("Connect");
-        
+
         // Set some options for our elements
         portField.setPrefColumnCount(4);
         hostField.setPrefColumnCount(20);
         connectBtn.setOnAction(e -> connectBtn_click());
-        
+
         // Organize our elements
-        HBox pane = new HBox(10, hostLabel, hostField, portLabel, portField, 
-                                    connectBtn);
+        HBox pane = new HBox(10, hostLabel, hostField, portLabel, portField,
+                connectBtn);
         pane.setAlignment(Pos.CENTER);
         pane.setPadding(new Insets(10));
         Scene scene = new Scene(pane);
-        
+
         // Display our window
         stage.setScene(scene);
         stage.showAndWait();
-        
+
         return connection;
     }
-    
+
     // We will represent the desired connection in the form of:
     //      hostname:port
     // which is a common representation
-    private static void connectBtn_click()
-    {
+    @Override
+    protected void connectBtn_click() {
         connection.put("hostname", hostField.getText());
         connection.put("port", portField.getText());
         stage.close();
