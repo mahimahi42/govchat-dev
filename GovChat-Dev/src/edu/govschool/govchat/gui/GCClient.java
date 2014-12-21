@@ -104,7 +104,6 @@ public class GCClient extends Application
                                                 GCConnectionOptionsBox.show();
             final String hostname = connection.get("hostname");
             final Integer port = Integer.parseInt(connection.get("port"));
-            System.out.println("PORT: " + port);
             clientSocket = new GCClientSocket(new ClientSocketListener(),
                                               hostname, port);
             clientSocket.connect();
