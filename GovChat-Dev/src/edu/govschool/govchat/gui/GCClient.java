@@ -99,8 +99,7 @@ public class GCClient extends Application
     {
         // Only connect if we have no connection
         if (socketClosed) {
-            final String[] connection = 
-                    GCConnectionOptionsBox.show().split(":");
+            final String[] connection = GCConnectionOptionsBox.show();
             clientSocket = new GCClientSocket(new ClientSocketListener(),
                                               connection[0],
                                               Integer.parseInt(connection[1]));

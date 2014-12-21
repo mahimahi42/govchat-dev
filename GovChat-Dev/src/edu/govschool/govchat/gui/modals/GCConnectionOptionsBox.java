@@ -25,7 +25,7 @@ public class GCConnectionOptionsBox
     // The final representation of our desired connection
     private static String connection = "";
     
-    public static String show()
+    public static String[] show()
     {
         // Create our Stage to display
         stage = new Stage();
@@ -57,7 +57,7 @@ public class GCConnectionOptionsBox
         stage.setScene(scene);
         stage.showAndWait();
         
-        return connection;
+        return connection.split(":");
     }
     
     // We will represent the desired connection in the form of:
