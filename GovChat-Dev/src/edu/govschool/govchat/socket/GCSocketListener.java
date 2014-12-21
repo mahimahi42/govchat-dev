@@ -10,5 +10,8 @@ package edu.govschool.govchat.socket;
  */
 public interface GCSocketListener 
 {
-
+    // Fired when a message is received.
+    public void onMessage(String line);
+    // Fired when a close update is received.
+    public void onCloseUpdate(Boolean closed);
 }
