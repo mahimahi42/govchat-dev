@@ -87,7 +87,7 @@ public class GCServer extends Application
         // Only send non-empty messages
         if (!msg.equals("")) {
             // Send the message over the connection
-            //serverSocket.sendMessage(msg);
+            serverSocket.sendMessage(msg);
             // Update our own message area
             msgArea.appendText("SERVER: " + msg + "\n");
             // Set the entry field text to the empty string
@@ -97,6 +97,37 @@ public class GCServer extends Application
     
     private void connectBtn_click()
     {
+        // Only connect if we have no connection, or are not already trying to
+        // connect
+        if (!tryingToConnect && socketClosed) {
+            // Create our server socket
+            serverSocket = new GCServerSocket(new ServerSocketListener(),
+                                              GCServerSocket.DEFAULT_PORT);
+            // Set our flag, because we're waiting for connections
+            tryingToConnect = true;
+            // Connect our socket
+            serverSocket.connect();
+        }
+    }
+    
+    // This private class will be our listener for our server socket. It will
+    // listen for messages sent from the client and for the connection status of
+    // the socket.
+    private class ServerSocketListener implements GCSocketListener
+    {
+        // If we've received a client message
+        @Override
+        public void onMessage(final String line)
+        {
+            msgArea.appendText("CLIENT: " + line + "\n");
+        }
         
+        // Update our connection status
+        @Override
+        public void onCloseUpdate(final Boolean isClosed)
+        {
+            socketClosed = isClosed;
+            tryingToConnect = false;
+        }
     }
 }
