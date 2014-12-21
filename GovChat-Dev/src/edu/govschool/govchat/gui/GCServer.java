@@ -82,7 +82,17 @@ public class GCServer extends Application
     
     private void sendBtn_click()
     {
-        
+        // Create a temporary variable to store our message
+        final String msg = entryField.getText();
+        // Only send non-empty messages
+        if (!msg.equals("")) {
+            // Send the message over the connection
+            serverSocket.sendMessage(msg);
+            // Update our own message area
+            msgArea.appendText("SERVER: " + msg + "\n");
+            // Set the entry field text to the empty string
+            entryField.setText("");
+        }
     }
     
     private void connectBtn_click()
