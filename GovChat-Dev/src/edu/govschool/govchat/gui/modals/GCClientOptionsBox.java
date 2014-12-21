@@ -56,9 +56,9 @@ public class GCClientOptionsBox extends GCConnectionOptionsBox
         return connection;
     }
 
-    // We will represent the desired connection in the form of:
-    //      hostname:port
-    // which is a common representation
+    // We will represent the desired connection in the form of a map,
+    // which is a data structure like an array but that uses Objects as indices,
+    // not integers.
     @Override
     protected void connectBtn_click() {
         connection.put("hostname", hostField.getText());
