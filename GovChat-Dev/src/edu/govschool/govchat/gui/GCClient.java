@@ -1,7 +1,10 @@
 package edu.govschool.govchat.gui;
 
+// We need our modals
+import edu.govschool.govchat.gui.modals.*;
 // We need to import our socket package
 import edu.govschool.govchat.socket.*;
+import java.util.Map;
 // JavaFX imports
 import javafx.application.*;
 import javafx.geometry.*;
@@ -97,9 +100,15 @@ public class GCClient extends Application
     {
         // Only connect if we have no connection
         if (socketClosed) {
+            // Get our connection details
+            final Map<String, String> connection = 
+                                                new GCClientOptionsBox().show();
+            final String hostname = connection.get("hostname");
+            final Integer port = Integer.parseInt(connection.get("port"));
+            // Create our client socket
             clientSocket = new GCClientSocket(new ClientSocketListener(),
-                                              GCClientSocket.DEFAULT_HOST,
-                                              GCClientSocket.DEFAULT_PORT);
+                                              hostname, port);
+            // Connect our socket
             clientSocket.connect();
         }
     }
