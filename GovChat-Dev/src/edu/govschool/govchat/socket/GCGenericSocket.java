@@ -38,4 +38,71 @@ public abstract class GCGenericSocket implements GCSocketListener
     private Thread setupThread;
     // Thread to read message from our connection
     private Thread readerThread;
+    
+    /**
+     * Empty constructor.
+     * Creates a new <code>GCGenericSocket</code> on port 2000.
+     */
+    public GCGenericSocket()
+    {
+        this(DEFAULT_PORT);
+    }
+    
+    /**
+     * Default constructor.
+     * Creates a new <code>GCGenericSocket</code> on the given port.
+     * @param port the port to bind to
+     */
+    public GCGenericSocket(int port)
+    {
+        this.port = port;
+    }
+    
+    /**
+     * Setup a connection in the background.
+     * Later, <code>onCloseUpdate(boolean)</code> will be called if this method
+     * successfully completes.
+     */
+    public void connect()
+    {
+        try {
+            // Open the socket connection in the background and setup our I/O 
+            // streams
+            setupThread = new SocketSetupThread();
+            setupThread.start();
+            // Start the thread that will listen for message on the input stream
+            // in the background
+            readerThread = new SocketReaderThread();
+            readerThread.start();
+        } catch (Exception e) {} // You dun goofed!
+    }
+    
+    /**
+     * Setup our initial connection in the background.
+     * Normally, our entire application would have to wait until the connection
+     * occurred before continuing. However, since we will be doing it in a 
+     * <code>Thread</code>, it will happen in the background.
+     */
+    private class SocketSetupThread extends Thread
+    {
+        @Override
+        public void run()
+        {
+            
+        }
+    }
+    
+    /**
+     * Listen for messages in the background.
+     * Again, our application would seem to freeze while waiting for messages.
+     * We need to try to read from the input stream in the background.
+     */
+    private class SocketReaderThread extends Thread
+    {
+        @Override
+        public void run()
+        {
+            
+        }
+    }
 }
