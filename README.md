@@ -54,9 +54,9 @@ public int someMethod(int x)
 ```
 
 ##### General Formatting
-1. No lines should have text beyond 80 characters
-2. There should be a blank line before and after every loop
-3. While curly braces for methods and classes occur on the next newline, this is not so for loops and control statements:
+- No lines should have text beyond 80 characters
+- There should be a blank line before and after every loop
+- While curly braces for methods and classes occur on the next newline, this is not so for loops and control statements:
 
 ```java
 public void someMethod(int x)
@@ -68,4 +68,4 @@ public void someMethod(int x)
     }
 }
 ```
-4. Additional clauses (else, else if, catch, etc.) should follow on the same line as the previous curly brace, see above example
+- Additional clauses (else, else if, catch, etc.) should follow on the same line as the previous curly brace, see above example
