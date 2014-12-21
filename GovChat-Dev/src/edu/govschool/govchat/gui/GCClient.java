@@ -100,12 +100,15 @@ public class GCClient extends Application
     {
         // Only connect if we have no connection
         if (socketClosed) {
+            // Get our connection details
             final Map<String, String> connection = 
                                                 new GCClientOptionsBox().show();
             final String hostname = connection.get("hostname");
             final Integer port = Integer.parseInt(connection.get("port"));
+            // Create our client socket
             clientSocket = new GCClientSocket(new ClientSocketListener(),
                                               hostname, port);
+            // Connect our socket
             clientSocket.connect();
         }
     }
