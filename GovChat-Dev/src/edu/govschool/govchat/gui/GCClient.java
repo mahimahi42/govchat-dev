@@ -19,6 +19,22 @@ import javafx.stage.*;
  */
 public class GCClient extends Application
 {
+    // Our GUI initially is very spartan, consisting of a large text area to
+    // display messages sent and received, a entry field to enter messages, a
+    // connect button and a send button. At first, we just connect using the
+    // default host and port, localhost and 2000, so we don't need any elements
+    // to input a custom host and port yet.
+    private TextArea msgArea;
+    private TextField entryField;
+    private Button sendBtn;
+    private Button connectBtn;
+    
+    // We need a client socket, since this is a client GUI
+    private GCClientSocket clientSocket;
+    
+    // This flag will tell us if we're connected or not
+    private boolean socketClosed = true;
+    
     public static void main(String[] args)
     {
         launch(args);
