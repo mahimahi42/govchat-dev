@@ -87,7 +87,7 @@ public class GCServer extends Application
         // Only send non-empty messages
         if (!msg.equals("")) {
             // Send the message over the connection
-            serverSocket.sendMessage(msg);
+            //serverSocket.sendMessage(msg);
             // Update our own message area
             msgArea.appendText("SERVER: " + msg + "\n");
             // Set the entry field text to the empty string
