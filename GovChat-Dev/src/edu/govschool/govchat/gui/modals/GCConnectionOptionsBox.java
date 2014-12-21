@@ -1,5 +1,9 @@
 package edu.govschool.govchat.gui.modals;
 
+// For representing the connection
+import java.util.HashMap;
+import java.util.Map;
+// Our JavaFX imports
 import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -23,9 +27,9 @@ public class GCConnectionOptionsBox
     private static Button connectBtn;
     
     // The final representation of our desired connection
-    private static String connection = "";
+    private static Map<String, String> connection = new HashMap<>();
     
-    public static String[] show()
+    public static Map show()
     {
         // Create our Stage to display
         stage = new Stage();
@@ -35,8 +39,8 @@ public class GCConnectionOptionsBox
         stage.setTitle("Connect to GovChat");
         
         // Initialize the rest of our elements
-        portField = new TextField("localhost");
-        hostField = new TextField("2000");
+        hostField = new TextField("localhost");
+        portField = new TextField("2000");
         portLabel = new Label("Port:");
         hostLabel = new Label("Host:");
         connectBtn = new Button("Connect");
@@ -57,7 +61,7 @@ public class GCConnectionOptionsBox
         stage.setScene(scene);
         stage.showAndWait();
         
-        return connection.split(":");
+        return connection;
     }
     
     // We will represent the desired connection in the form of:
@@ -65,7 +69,8 @@ public class GCConnectionOptionsBox
     // which is a common representation
     private static void connectBtn_click()
     {
-        connection = hostField.getText() + ":" + portField.getText();
+        connection.put("hostname", hostField.getText());
+        connection.put("port", portField.getText());
         stage.close();
     }
 }
