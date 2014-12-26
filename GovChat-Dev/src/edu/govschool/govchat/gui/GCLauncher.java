@@ -2,6 +2,7 @@ package edu.govschool.govchat.gui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -42,6 +43,7 @@ public class GCLauncher extends Application
         
         // Organize our window
         VBox pane = new VBox(10, serverBtn, clientBtn);
+        pane.setPadding(new Insets(20, 60, 20, 60));
         Scene scene = new Scene(pane);
         
         // Create and show our window
