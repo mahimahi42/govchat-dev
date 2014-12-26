@@ -1,6 +1,9 @@
 package edu.govschool.govchat.user;
 
+import edu.govschool.govchat.net.GCServerInfo;
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * This class represents a connected user to GovChat.
@@ -15,6 +18,8 @@ public class GCUser implements Serializable
 {
     // The username of the user
     private String username;
+    // A list of favorite servers
+    private List<GCServerInfo> favoriteServers;
     
     /**
      * Empty constructor.
@@ -33,6 +38,7 @@ public class GCUser implements Serializable
     public GCUser(String username)
     {
         this.username = username;
+        this.favoriteServers = new LinkedList<>();
     }
     
     /**
@@ -42,5 +48,27 @@ public class GCUser implements Serializable
     public String getUsername()
     {
         return this.username;
+    }
+    
+    /**
+     * Gets the favorite servers of this <code>GCUser</code>.
+     * All the methods of <code>java.util.LinkedList</code> are available to
+     * search and mutate the list of favorite servers.
+     * @return the list of favorite servers
+     */
+    public List<GCServerInfo> getFavoriteServers()
+    {
+        return this.favoriteServers;
+    }
+    
+    /**
+     * Add a server to the list of favorite servers.
+     * This is a convenience method to quickly add a server to the list of
+     * favorite servers.
+     * @param server the server to add
+     */
+    public void addServerToFavorites(GCServerInfo server)
+    {
+        this.favoriteServers.add(server);
     }
 }
