@@ -1,4 +1,4 @@
-package edu.govschool.govchat.socket;
+package edu.govschool.govchat.net.socket;
 
 /**
  * Listener interface for sockets used in GovChat.

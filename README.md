@@ -1,5 +1,4 @@
-govchat-dev
-===========
+# govchat-dev
 
 The development repo for GovChat. This will used as the example for GovChat development, as the real application will go above and beyond what is here.
 

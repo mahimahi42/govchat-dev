@@ -1,7 +1,11 @@
 package edu.govschool.govchat.gui;
 
+// We need our modals
+import edu.govschool.govchat.net.socket.GCSocketListener;
+import edu.govschool.govchat.net.socket.GCServerSocket;
+import edu.govschool.govchat.gui.modals.*;
 // We need to import our socket package
-import edu.govschool.govchat.socket.*;
+import java.util.Map;
 // JavaFX imports
 import javafx.application.*;
 import javafx.geometry.*;
@@ -100,9 +104,12 @@ public class GCServer extends Application
         // Only connect if we have no connection, or are not already trying to
         // connect
         if (!tryingToConnect && socketClosed) {
+            // Get our connection details
+            final Map<String, String> connection =
+                                                new GCServerOptionsBox().show();
+            final Integer port = Integer.parseInt(connection.get("port"));
             // Create our server socket
-            serverSocket = new GCServerSocket(new ServerSocketListener(),
-                                              GCServerSocket.DEFAULT_PORT);
+            serverSocket = new GCServerSocket(new ServerSocketListener(), port);
             // Set our flag, because we're waiting for connections
             tryingToConnect = true;
             // Connect our socket
