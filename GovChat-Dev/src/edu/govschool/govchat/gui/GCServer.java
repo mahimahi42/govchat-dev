@@ -1,9 +1,10 @@
 package edu.govschool.govchat.gui;
 
 // We need our modals
+import edu.govschool.govchat.net.socket.GCSocketListener;
+import edu.govschool.govchat.net.socket.GCServerSocket;
 import edu.govschool.govchat.gui.modals.*;
 // We need to import our socket package
-import edu.govschool.govchat.socket.*;
 import java.util.Map;
 // JavaFX imports
 import javafx.application.*;
