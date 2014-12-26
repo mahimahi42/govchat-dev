@@ -34,4 +34,13 @@ public class GCUser implements Serializable
     {
         this.username = username;
     }
+    
+    /**
+     * Gets the username of this <code>GCUser</code>.
+     * @return the username of this <code>GCUser</code>
+     */
+    public String getUsername()
+    {
+        return this.username;
+    }
 }
