@@ -1,14 +1,17 @@
 package edu.govschool.govchat.net;
 
+import java.io.Serializable;
+
 /**
  * Class to represent a GovChat server.
  * There are two pieces of information needed for a client to connect to a
  * GovChat server, the hostname and port. While we could use a data structure
  * such as a <code>Map</code> to represent this, creating a custom class allows
- * us full control over how we want to represent a server in GovChat.
+ * us full control over how we want to represent a server in GovChat. This class
+ * inherits from <code>Serializable</code> so it can be written to a file.
  * @author Mr. Davis
  */
-public class GCServerInfo 
+public class GCServerInfo implements Serializable
 {
     // A nickname for the server
     private String nickname;
