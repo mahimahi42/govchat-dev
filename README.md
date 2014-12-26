@@ -4,6 +4,9 @@ The development repo for GovChat. This will used as the example for GovChat deve
 
 The basis of this project can be found in this [Oracle blog post](https://blogs.oracle.com/jtc/entry/javafx_sockets_and_threading_lessons).
 
+#### Running This Example
+Import the project into NetBeans, then run the `GCLauncher.java` file. This will allow you to spawn both a server and client to try.
+
 #### Style Guide
 
 ##### Imports
@@ -11,8 +14,20 @@ All import should be listed in alphabetical order, as below:
 
 ```java
 import java.io.IOException;
-import java.net.*;
+import java.net.Socket;
 import javafx.application.Platform;
+```
+
+If you are usinging less than six classes from an imported package, import each class individually. If you're using more than six, use the `*` wildcard:
+
+```java
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 ```
 
 ##### Classes
@@ -34,6 +49,11 @@ implements InterfaceTwo
     // Instance variables
     public String hello = "Hello, world!";
 }
+
+// Classes with only interfaces should be as follows
+public class ClassName implements InterfaceOne
+implements InterfaceTwo
+{}
 ```
 
 ##### Methods
