@@ -1,4 +1,4 @@
-package edu.govschool.govchat.socket;
+package edu.govschool.govchat.net.socket;
 
 // For input/output streams
 import java.io.*;

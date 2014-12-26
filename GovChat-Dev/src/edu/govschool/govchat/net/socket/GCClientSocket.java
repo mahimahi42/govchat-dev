@@ -1,4 +1,4 @@
-package edu.govschool.govchat.socket;
+package edu.govschool.govchat.net.socket;
 
 // For IOExceptions
 import java.io.IOException;
