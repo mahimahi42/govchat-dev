@@ -53,4 +53,61 @@ public class GCServerInfo
         this.hostname = hostname;
         this.port = port;
     }
+    
+    /**
+     * Sets the nickname for the <code>GCServerInfo</code>.
+     * We may want to update the nickname for a server.
+     * @param nickname the new nickname
+     */
+    public void setNickname(String nickname)
+    {
+        this.nickname = nickname;
+    }
+
+    /**
+     * Sets the hostname for the <code>GCServerInfo</code>.
+     * The server details may change for a server.
+     * @param hostname the new hostname
+     */
+    public void setHostname(String hostname)
+    {
+        this.hostname = hostname;
+    }
+    
+    /**
+     * Sets the port for the <code>GCServerInfo</code>.
+     * The server details may change for a server.
+     * @param port the new port
+     */
+    public void setPort(int port)
+    {
+        this.port = port;
+    }
+    
+    /**
+     * Gets the nickname from the <code>GCServerInfo</code>.
+     * @return the current nickname
+     */
+    public String getNickname()
+    {
+        return this.nickname;
+    }
+    
+    /**
+     * Gets the hostname from the <code>GCServerInfo</code>.
+     * @return the current hostname
+     */
+    public String getHostname()
+    {
+        return this.hostname;
+    }
+    
+    /**
+     * Gets the port from the <code>GCServerInfo</code>.
+     * @return the current port
+     */
+    public int getPort()
+    {
+        return this.port;
+    }
 }
