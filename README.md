@@ -18,7 +18,7 @@ import java.net.Socket;
 import javafx.application.Platform;
 ```
 
-If you are usinging less than six classes from an imported package, import each class individually. If you're using more than six, use the `*` wildcard:
+If you are using less than six classes from an imported package, import each class individually. If you're using more than six, use the `*` wildcard:
 
 ```java
 import javafx.application.Application;
